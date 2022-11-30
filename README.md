@@ -4,6 +4,8 @@
 - Vue 3
 - InertiaJs
 
+# Deployment
+The application is deployed on AWS lambda using [laravel vapor](https://vapor.laravel.com/), the database is a serverless v2 mysql database from AWS RDS
 # Dev Requirements
 - Docker (latest)
 - Docker Compose (latest)
