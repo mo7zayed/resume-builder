@@ -7,6 +7,9 @@
 # API Docs
 - URL: https://documenter.getpostman.com/view/1350874/2s8YszPqkv
 - App url: https://qih6fnifajwkpkmjy4fcrz5rii0kexvd.lambda-url.us-east-1.on.aws
+
+# Database design
+![alt text](db.png)
 # Deployment
 The application is deployed on AWS lambda using [laravel vapor](https://vapor.laravel.com/), the database is a serverless v2 mysql database from AWS RDS
 # Dev Requirements
