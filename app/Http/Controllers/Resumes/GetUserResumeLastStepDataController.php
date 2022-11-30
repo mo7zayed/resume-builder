@@ -12,11 +12,11 @@ class GetUserResumeLastStepDataController extends Controller
         $stepData = $request->user()->resume->lastStepData()->first();
 
         return response()->json([
-            'data' => [
+            'data' => $stepData ? [
                 'id' => $stepData->id,
                 'resume_step_id' => $stepData->resume_step_id,
                 'data' => $stepData->data,
-            ],
+            ] : null,
         ]);
     }
 }
