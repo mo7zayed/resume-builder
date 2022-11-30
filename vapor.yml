@@ -1,0 +1,10 @@
+id: 39200
+name: App
+environments:
+    production:
+        memory: 1024
+        cli-memory: 512
+        runtime: 'php-8.1:al2'
+        build:
+            - 'composer install --no-dev'
+            - 'php artisan event:cache'

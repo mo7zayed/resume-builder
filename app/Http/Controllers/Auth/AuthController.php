@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -43,6 +44,8 @@ class AuthController extends Controller
 
         $token = $user->createToken($user->name);
 
+        event(new Registered($user));
+
         return response()->json([
             'message' => 'user logged successfully',
             'access_token' => $token->plainTextToken,
@@ -56,35 +59,6 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'user info retrieved successfully',
             'user' => new UserResource(auth()->user()),
-        ]);
-    }
-
-    public function verify()
-    {
-        return response()->json([
-            'message' => 'token is valid',
-            'valid' => true,
-        ]);
-    }
-
-    public function refresh()
-    {
-        /**
-         * @var User
-         */
-        $user = auth()->user();
-
-        $tokenName = $user->currentAccessToken()->name;
-
-        $user->currentAccessToken()->delete();
-
-        $token = $user->createToken($tokenName);
-
-        return response()->json([
-            'message' => 'tokens refreshed successfully',
-            'access_token' => $token->plainTextToken,
-            'user' => new UserResource($user),
-            'token_type' => 'Bearer',
         ]);
     }
 

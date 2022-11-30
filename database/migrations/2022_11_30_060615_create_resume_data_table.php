@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Resume;
 use App\Models\ResumeStep;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +14,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('resumes', function (Blueprint $table) {
+        Schema::create('resume_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(ResumeStep::class, 'resume_last_step_id');
-            $table->boolean('is_completed')->default(false);
+            $table->foreignIdFor(Resume::class);
+            $table->foreignIdFor(ResumeStep::class);
+            $table->jsonb('data');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('resumes');
+        Schema::dropIfExists('resume_data');
     }
 };
